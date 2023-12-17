@@ -31,3 +31,25 @@ if (result) {
 } else {
   console.log("Objects are not the same");
 }
+
+
+fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Country Flags:');
+    data.forEach(country => {
+      if (country.flags) {
+        console.log(country.flags.svg);
+      }
+    });
+    console.log('\nCountry Information:');
+    data.forEach(country => {
+      console.log('Name:', country.name.common);
+      console.log('Region:', country.region);
+      console.log('Sub-region:', country.subregion);
+      console.log('Population:', country.population);
+      console.log('--------------------');
+    });
+  })
+  .catch(error => console.error('Error fetching data:', error));
+
